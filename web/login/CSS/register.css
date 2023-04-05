@@ -1,0 +1,130 @@
+.main {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.left {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+}
+.zhuce {
+    position: relative;
+    left: 200px;
+    top: 83px;
+    width: 342px;
+    height: 70px;
+    opacity: 1;
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: 26px;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+    vertical-align: middle;
+}
+.one,.two,.three {
+    position: relative;
+    height: 50px;
+    width: 340px;
+    font-size: 24px;
+    border-radius: 78px;
+    background-color: rgb(237, 235, 235);
+    border: 1px solid rgb(237, 235, 235);
+    margin-top: 30px;
+    padding-left: 20px;
+}
+.biaodan {
+    width: 50%;
+    margin: 70px auto 0;
+}
+.anniu {
+    position: relative;
+    width: 120px;
+    height: 50px;
+    background-color: rgba(121, 72, 234, 1);
+    border-radius: 50px;
+    border: 1px solid rgba(121, 72, 234, 1);
+    margin-left: 110px;
+    color: white;
+    margin-top: 30px;
+}
+.other {
+    position: relative;
+    width: 430pxpx;
+    height: 55px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 26px;
+    line-height: 0px;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 30px;
+}
+.a,.b {
+    position: relative;
+    width: 50px;
+    left: 270px;
+    bottom: 10px;
+}
+.b {
+    margin-left: 30px;
+}
+.right {
+    position: relative;
+    float: right;
+    left: 960px;
+    top: -506px;
+    width: 1711px;
+    height: 1711px;
+    opacity: 1;
+    background: rgba(121, 72, 234, 1);
+    border-radius: 50%;
+}
+.text1 {
+    position: relative;
+    left: 100px;
+    top: 600px;
+    width: 620px;
+    height: 185px;
+    opacity: 1;
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: 9px;
+    line-height: 0px;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    vertical-align: middle;
+}
+.text2 {
+    position: relative;
+    left: 100px;
+    top: 500px;
+    width: 620px;
+    height: 185px;
+    opacity: 1;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 9px;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    vertical-align: middle;
+}
+.sixth {
+    position: relative;
+    border: 4px solid rgba(255, 255, 255, 1);
+    background-color: rgba(121, 72, 234, 1);
+    width: 196px;
+    height: 70px;
+    font-size: 30px;
+    color: white;
+    opacity: 1;
+    border-radius: 78px;
+    top: 50px;
+}
+.sofa {
+    position: relative;
+    width: 30%;
+    top: 300px;
+    right: 100px;
+}
