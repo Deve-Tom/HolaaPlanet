@@ -1,0 +1,114 @@
+.main {
+    position: absolute;
+    width: 1360px;
+    height: 713px;
+    overflow: hidden;
+}
+.left-box {
+    position: relative;
+    left: -1051px;
+    top: -584px;
+    width: 1711px;
+    height: 1711px;
+    opacity: 1;
+    background-color: rgba(121, 72, 234, 1);
+    border-radius: 50%;
+}
+.first {
+    position: relative;
+    left: 1082px;
+    top: 652px;
+    width: 620px;
+    height: 185px;
+    opacity: 1;
+    font-size: 48px;
+    font-weight: 500;
+    letter-spacing: 9px;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    vertical-align: middle;
+}
+.second {
+    position: relative;
+    left: 1082px;
+    top: 580px;
+    width: 620px;
+    height: 185px;
+    opacity: 1;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: 9px;
+    color: rgba(255, 255, 255, 1);
+    text-align: center;
+    vertical-align: middle;
+}
+.third {
+    position: relative;
+    left: 1254px;
+    top: 524px;
+    width: 196px;
+    height: 70px;
+    font-size: 30px;
+    color: white;
+    opacity: 1;
+    border-radius: 78px;
+    border: 4px solid rgba(255, 255, 255, 1);
+    background-color: rgba(121, 72, 234, 1);
+}
+.yuhangyuan {
+    position: relative;
+    display: block;
+    top: 500px;
+    left: 1300px;
+    width: 400px;
+}
+.right-box {
+    position: relative;
+    float: right;
+    bottom: 1600px;
+    right: 100px;
+}
+.one {
+    font-size: 36px;
+    text-align: center;
+    margin-right: 20px;
+}
+.username,.password {
+    height: 50px;
+    width: 340px;
+    font-size: 24px;
+    margin-bottom: 30px;
+    border-radius: 50px;
+    padding-left: 20px;
+    background-color: rgb(237, 235, 235);
+    border: 1px solid rgb(237, 235, 235);
+}
+.username {
+    position: relative;
+    margin-top: 30px;
+}
+.other {
+    position: relative;
+    text-align: center;
+    width: 340px;
+    margin-top: 30px;
+}
+.fourth {
+    width: 120px;
+    height: 50px;
+    background-color: rgba(121, 72, 234, 1);
+    border-radius: 50px;
+    border: 1px solid rgba(121, 72, 234, 1);
+    margin-left: 110px;
+    color: white;
+}
+.q, .v {
+    position: relative;
+    top: 20px;
+    width: 50px;
+}
+.q {
+    position: relative;
+    margin-left: 100px;
+    margin-right: 20px;
+}
