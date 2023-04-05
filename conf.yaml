@@ -1,11 +1,9 @@
-
 mysql:
   user: root
   password: 123456
   host: 127.0.0.1
   port: 3306
   database: Holla
-
 server:
   host: 192.168.1.1
   port: 8080
