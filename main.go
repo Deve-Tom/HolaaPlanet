@@ -1,12 +1,7 @@
 package main
 
-import (
-	"HolaaPlanet/configs"
-	"fmt"
-	"github.com/spf13/viper"
-)
+import "HolaaPlanet/configs"
 
 func main() {
-	configs.InitRootConfig()
-	fmt.Printf(viper.GetString("mysql.user"))
+	configs.InitDB()
 }
