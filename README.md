@@ -30,6 +30,7 @@ mysql:
 ├── static //存放静态文件
 ├── tests //测试文件
 ├── utils //工具函数
+├── routers //路由
 └── web //前端源码
 ```
 
