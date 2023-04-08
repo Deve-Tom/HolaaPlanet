@@ -51,8 +51,9 @@
 }
 .other {
     position: relative;
-    width: 430pxpx;
+    width: 430px;
     height: 55px;
+    left:140px;
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 26px;
@@ -121,10 +122,12 @@
     opacity: 1;
     border-radius: 78px;
     top: 50px;
+    z-index: 2;
 }
 .sofa {
     position: relative;
     width: 30%;
     top: 300px;
     right: 100px;
+    z-index: 1;
 }
