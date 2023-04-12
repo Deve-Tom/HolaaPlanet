@@ -25,7 +25,7 @@ mysql:
 ├── go.mod
 ├── go.sum
 ├── main.go
-├── models //数据库处理
+├── entity //实体类
 ├── services //业务逻辑代码
 ├── static //存放静态文件
 ├── tests //测试文件
