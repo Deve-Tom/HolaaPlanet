@@ -67,6 +67,8 @@ func InitDB() *gorm.DB {
 	createTable(db)
 	// 建立主键
 	createPrimaryKey(db)
+	// 建立自增长
+	changeTableAutoIncrement(db)
 	// 建立外键
 	createForeignKey(db)
 
@@ -156,6 +158,23 @@ func createPrimaryKey(db *gorm.DB) {
 	db.Exec("alter table `achievement_lists` add primary key (achievement_id)")
 }
 
+// changeTableAutoIncrement
+// Maintainers:贺胜 Times:2023-04-13
+// Part 1:修改表的自增长
+// Part 2:使用Gorm框架修改表的自增长
+// Part 3:修改表的自增长，不会重复修改，如果存在则跳过/*
+func changeTableAutoIncrement(db *gorm.DB) {
+	db.Exec("alter table `users` change user_id user_id bigint not null auto_increment;")
+	db.Exec("alter table `groups` change group_id group_id bigint not null auto_increment;")
+	// db.Exec("alter table `send_group_messages` change group_message_id group_message_id bigint not null auto_increment;")
+	// db.Exec("alter table `send_user_messages` change message_id message_id bigint not null auto_increment;")
+	db.Exec("alter table `achievement_lists` change achievement_id achievement_id bigint not null auto_increment;")
+	// db.Exec("alter table `group_files` change file_id file_id bigint not null auto_increment;")
+	db.Exec("alter table `friends_lists` change friend_list_id friend_list_id bigint not null auto_increment;")
+	db.Exec("alter table `plan_lists` change plan_list_id plan_list_id bigint not null auto_increment;")
+	db.Exec("alter table `achievement_lists` change achievement_id achievement_id bigint not null auto_increment;")
+}
+
 // createForeignKey
 // Maintainers:贺胜 Times:2023-04-13
 // Part 1:创建外键
@@ -163,21 +182,21 @@ func createPrimaryKey(db *gorm.DB) {
 // Part 3:创建外键，不会重复创建，如果存在则跳过/*
 func createForeignKey(db *gorm.DB) {
 	// 建立外键
-	db.Exec("alter table `groups` add constraint fk_groups_users1 foreign key (create_user_id)  references users(user_id) on delete cascade")
-	db.Exec("alter table `send_group_messages` add constraint fk_send_group_messages_send_user_id1 foreign key (send_user_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `send_group_messages` add constraint fk_send_group_messages_send_receive_group_id1 foreign key (receive_group_id) references `groups`(group_id) on delete cascade;")
-	db.Exec("alter table `send_user_messages` add constraint fk_send_user_messages_send_user_id1 foreign key (send_user_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `send_user_messages` add constraint fk_send_user_messages_receive_user_id1 foreign key (receive_user_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `get_achievements` add constraint fk_send_user_get_achievements_get_user_id1 foreign key (get_user_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `get_achievements` add constraint fk_get_achievements_get_achievement_id1 foreign key (get_achievement_id) references achievement_lists(achievement_id) on delete cascade;")
-	db.Exec("alter table `group_members` add constraint fk_group_members_user_id1 foreign key (user_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `group_members` add constraint fk_group_members_group_id1 foreign key (group_id) references `groups`(group_id) on delete cascade;")
-	db.Exec("alter table `add_friends` add constraint fk_add_friends_user_id1 foreign key (user_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `add_friends` add constraint fk_add_friends_friend_id1 foreign key (friend_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `friends_lists` add constraint fk_friends_lists_friend_id1 foreign key (friend_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `friends_lists` add constraint fk_friends_lists_user_id1 foreign key (user_id) references users(`user_id`) on delete cascade;")
-	db.Exec("alter table `plan_lists` add constraint fk_plan_lists_user_id1 foreign key (user_id) references users(user_id) on delete cascade;")
-	db.Exec("alter table `group_files` add constraint fk_group_files_group_id1 foreign key (group_id) references `groups`(group_id) on delete cascade;")
+	db.Exec("alter table `groups` add constraint fk_groups_users1 foreign key (create_user_id)  references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `send_group_messages` add constraint fk_send_group_messages_send_user_id1 foreign key (send_user_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `send_group_messages` add constraint fk_send_group_messages_send_receive_group_id1 foreign key (receive_group_id) references `groups`(group_id) on delete cascade on update cascade;")
+	db.Exec("alter table `send_user_messages` add constraint fk_send_user_messages_send_user_id1 foreign key (send_user_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `send_user_messages` add constraint fk_send_user_messages_receive_user_id1 foreign key (receive_user_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `get_achievements` add constraint fk_send_user_get_achievements_get_user_id1 foreign key (get_user_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `get_achievements` add constraint fk_get_achievements_get_achievement_id1 foreign key (get_achievement_id) references achievement_lists(achievement_id) on delete cascade on update cascade;")
+	db.Exec("alter table `group_members` add constraint fk_group_members_user_id1 foreign key (user_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `group_members` add constraint fk_group_members_group_id1 foreign key (group_id) references `groups`(group_id) on delete cascade on update cascade;")
+	db.Exec("alter table `add_friends` add constraint fk_add_friends_user_id1 foreign key (user_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `add_friends` add constraint fk_add_friends_friend_id1 foreign key (friend_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `friends_lists` add constraint fk_friends_lists_friend_id1 foreign key (friend_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `friends_lists` add constraint fk_friends_lists_user_id1 foreign key (user_id) references users(`user_id`) on delete cascade on update cascade;")
+	db.Exec("alter table `plan_lists` add constraint fk_plan_lists_user_id1 foreign key (user_id) references users(user_id) on delete cascade on update cascade;")
+	db.Exec("alter table `group_files` add constraint fk_group_files_group_id1 foreign key (group_id) references `groups`(group_id) on delete cascade on update cascade;")
 }
 
 // init
