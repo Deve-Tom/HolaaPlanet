@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"HolaaPlanet/middleware"
 	"HolaaPlanet/services"
 	"github.com/gin-gonic/gin"
 )
@@ -16,7 +17,10 @@ func InitRouter() *gin.Engine {
 	apiRouter := r.Group("/holaa")
 
 	// API service
+	// Maintainers:贺胜 Times:2023-04-13
 	apiRouter.POST("/user/register/", services.Register)
+	apiRouter.POST("/user/login/", services.Login)
+	apiRouter.GET("/user/", middleware.AuthMiddleWare(), services.UserSingleInfoServer)
 
 	return r
 }
