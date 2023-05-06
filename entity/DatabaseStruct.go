@@ -3,9 +3,10 @@ package entity
 import "time"
 
 // User
-// Maintainers:贺胜  Times:2023-04-13
+// Maintainers:贺胜  Times:2023-05-06
 // Part 1:用户表
 // Part 2:定义用户表，包括用户ID、在线状态、昵称、密码、个性签名、用户Token、日关注时间、周关注时间、月关注时间
+// Bug修复:修复原WeakFocusTime拼写错误，改为WeekFocusTime
 type User struct {
 	UserID         int       `gorm:"column:user_id;type:int;not null;primary key auto_increment"`
 	UserAvatar     string    `gorm:"column:user_avatar;type:varchar(100)"`
@@ -15,7 +16,7 @@ type User struct {
 	Signature      string    `gorm:"column:person_signature;type:nvarchar(50);"`
 	UserToken      string    `gorm:"column:user_token;type:varchar(400)"`
 	DayFocusTime   time.Time `gorm:"column:day_focus_time;type:time;default:00:00:00"`
-	WeakFocusTime  time.Time `gorm:"column:weak_focus_time;type:time;default:00:00:00"`
+	WeekFocusTime  time.Time `gorm:"column:week_focus_time;type:time;default:00:00:00"`
 	MonthFocusTime time.Time `gorm:"column:month_focus_time;type:time;default:00:00:00"`
 }
 

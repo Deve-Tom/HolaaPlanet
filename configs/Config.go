@@ -54,10 +54,11 @@ func LoadDB() *gorm.DB {
 }
 
 // InitDB
-// Maintainers:贺胜 Times:2023-04-13
+// Maintainers:贺胜 Times:2023-05-06
 // Part 1:数据库初始化
 // Part 2:使用Gorm框架初始化数据库，初始化成功则返回可操作的DB指针否则报错"Init DB false "并返回nil
-// Part 3:初始化数据库，包括建表、建立主键和建立外键/*
+// Part 3:初始化数据库，包括建表、建立主键和建立外键
+// Bug修复：修改数据库中users表的时间数据类型从datetime改为time(hh:mm:ss) 以及删除组消息与用户消息/*
 func InitDB() *gorm.DB {
 	db := LoadDB()
 	if db == nil {
@@ -71,6 +72,8 @@ func InitDB() *gorm.DB {
 	changeTableAutoIncrement(db)
 	// 建立外键
 	createForeignKey(db)
+	// 改变时间数据库类型
+	changeTableUserFocusTimeType(db)
 
 	return db
 }
@@ -147,8 +150,10 @@ func createPrimaryKey(db *gorm.DB) {
 	// 建立主键
 	db.Exec("alter table `users` add primary key (user_id)")
 	db.Exec("alter table `groups` add primary key (group_id)")
-	db.Exec("alter table `send_group_messages` add primary key (send_user_id,receive_group_id,group_message_id)")
-	db.Exec("alter table `send_user_messages` add primary key (send_user_id,receive_user_id,message_id)")
+	// db.Exec("alter table `send_group_messages` add primary key (send_user_id,receive_group_id,group_message_id)")
+	// db.Exec("alter table `send_user_messages` add primary key (send_user_id,receive_user_id,message_id)")
+	db.Exec("alter table `send_group_messages` add primary key (group_message_id)")
+	db.Exec("alter table `send_user_messages` add primary key (message_id)")
 	db.Exec("alter table `get_achievements` add primary key (get_user_id,get_achievement_id)")
 	db.Exec("alter table `group_files` add primary key (group_id,file_id)")
 	db.Exec("alter table `group_members` add primary key (group_id,user_id)")
@@ -166,13 +171,26 @@ func createPrimaryKey(db *gorm.DB) {
 func changeTableAutoIncrement(db *gorm.DB) {
 	db.Exec("alter table `users` change user_id user_id bigint not null auto_increment;")
 	db.Exec("alter table `groups` change group_id group_id bigint not null auto_increment;")
-	// db.Exec("alter table `send_group_messages` change group_message_id group_message_id bigint not null auto_increment;")
-	// db.Exec("alter table `send_user_messages` change message_id message_id bigint not null auto_increment;")
+
+	db.Exec("alter table `send_group_messages` change group_message_id group_message_id bigint not null auto_increment;")
+	db.Exec("alter table `send_user_messages` change message_id message_id bigint not null auto_increment;")
+
 	db.Exec("alter table `achievement_lists` change achievement_id achievement_id bigint not null auto_increment;")
 	// db.Exec("alter table `group_files` change file_id file_id bigint not null auto_increment;")
 	db.Exec("alter table `friends_lists` change friend_list_id friend_list_id bigint not null auto_increment;")
 	db.Exec("alter table `plan_lists` change plan_list_id plan_list_id bigint not null auto_increment;")
 	db.Exec("alter table `achievement_lists` change achievement_id achievement_id bigint not null auto_increment;")
+}
+
+// changeTableUserFocusTimeType
+// Maintainers:贺胜 Times:2023-05-06
+// Part 1:修改表中用户关注时长的数据库数据格式为time(00:00:00)
+// Part 2:使用Gorm框架修改表中用户关注时长的数据库数据格式为time(00:00:00)
+// Part 3:修改表中用户关注时长的数据库数据格式为time(00:00:00)，不会重复修改，如果存在则跳过/*
+func changeTableUserFocusTimeType(db *gorm.DB) {
+	db.Exec("alter table `users` change day_focus_time day_focus_time time null;")
+	db.Exec("alter table `users` change week_focus_time week_focus_time time null;")
+	db.Exec("alter table `users` change month_focus_time month_focus_time time null;")
 }
 
 // createForeignKey
