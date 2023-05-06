@@ -21,13 +21,13 @@ func (t *ErrorInfo) ErrorToString(err error) string {
 	return errMessage
 }
 
-var ERROR_USER ErrorInfo
+var ErrorUser ErrorInfo
 
 // init
 // Maintainers:贺胜 Times:2021-04-15
 // Part 1:初始化错误信息
 func init() {
-	ERROR_USER = ErrorInfo{
+	ErrorUser = ErrorInfo{
 		UserNotFound:      errors.New("user not found"),
 		UserPasswordError: errors.New("user password error"),
 	}

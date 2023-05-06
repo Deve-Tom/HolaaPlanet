@@ -43,7 +43,7 @@ func AuthMiddleWare() gin.HandlerFunc {
 		}
 
 		// 验证token是否有效
-		parse_token, claims, err := common.ParseToken(tokenString)
+		parseToken, claims, err := common.ParseToken(tokenString)
 		if err != nil {
 			ctx.JSON(http.StatusOK, gin.H{
 				"status_code": -1,
@@ -70,7 +70,7 @@ func AuthMiddleWare() gin.HandlerFunc {
 		}
 
 		// 验证token无效
-		if !parse_token.Valid {
+		if !parseToken.Valid {
 			ctx.JSON(http.StatusOK, gin.H{
 				"status_code": -1,
 				"status_msg":  "token is invalid",

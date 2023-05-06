@@ -22,13 +22,13 @@ func Login(ctx *gin.Context) {
 
 	// 用户认证错误处理
 	if err != nil {
-		if entity.ERROR_USER.ErrorToString(err) == entity.ERROR_USER.UserNotFound.Error() {
+		if entity.ErrorUser.ErrorToString(err) == entity.ErrorUser.UserNotFound.Error() {
 			ctx.JSON(http.StatusOK, gin.H{
 				"status_code": http.StatusUnauthorized,
 				"status_msg":  "用户不存在",
 			})
 			return
-		} else if entity.ERROR_USER.ErrorToString(err) == entity.ERROR_USER.UserPasswordError.Error() {
+		} else if entity.ErrorUser.ErrorToString(err) == entity.ErrorUser.UserPasswordError.Error() {
 			ctx.JSON(http.StatusOK, gin.H{
 				"status_code": http.StatusUnauthorized,
 				"status_msg":  "密码错误",
@@ -60,9 +60,9 @@ func UserAuthServer(userId int, password string) (string, error) {
 	configs.DB.Table("users").Where("user_id = ?", userId).First(&user)
 
 	if user.UserID == 0 {
-		return "", entity.ERROR_USER.UserNotFound
+		return "", entity.ErrorUser.UserNotFound
 	} else if user.Password != password {
-		return "", entity.ERROR_USER.UserPasswordError
+		return "", entity.ErrorUser.UserPasswordError
 	}
 
 	token, err := common.ReleaseToken(user)
