@@ -8,6 +8,18 @@ import (
 	"net/http"
 )
 
+// User UserRegisterTempStruct
+// Maintainers:贺胜 Times:2023-05-09
+// Part 1:用户注册临时结构体
+// Part 2:定义用户注册临时结构体，包括用户名、密码、个性签名
+// Bug修复：解决无法注册的问题*/
+type User struct {
+	UserID    int    `gorm:"column:user_id"`
+	Password  string `gorm:"column:password"`
+	Nickname  string `gorm:"column:nickname"`
+	Signature string `gorm:"column:person_signature"`
+}
+
 // Register
 // Maintainers:贺胜 Times:2023-04-13
 // Part 1:用户注册
@@ -44,7 +56,7 @@ func CreateAUser(userName string, password string, personSignature string) (bool
 		return false, 0
 	} else {
 		if result.RowsAffected == 0 {
-			user := entity.User{
+			user := User{
 				Nickname:  userName,
 				Password:  password,
 				Signature: personSignature,
@@ -56,7 +68,7 @@ func CreateAUser(userName string, password string, personSignature string) (bool
 				return false, 0
 			}
 		} else {
-			user := entity.User{
+			user := User{
 				Nickname:  userName,
 				Password:  password,
 				Signature: personSignature,
