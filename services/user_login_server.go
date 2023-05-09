@@ -10,13 +10,23 @@ import (
 )
 
 // Login
-// Maintainers:贺胜 Times:2021-04-15
+// Maintainers:贺胜 Times:2023-05-20
 // Part 1:用户登陆
 // Part 2:用户登陆服务，如果用户不存在，返回错误，如果密码错误，返回错误，如果成功，返回token
+// BUG: 紧急Bug修复，解决使用Json文件进行数据交流时，无法识别的情况
 func Login(ctx *gin.Context) {
-	userId, _ := strconv.Atoi(ctx.Query("user_id"))
-	password := ctx.Query("password")
+	var requestBody entity.RequestBodyUserLogin
+	err := ctx.BindJSON(&requestBody)
+	if err != nil {
+		ctx.JSON(http.StatusOK, gin.H{
+			"status_code": http.StatusUnauthorized,
+			"status_msg":  "Parsing request body error",
+		})
+		return
+	}
 
+	userId, _ := strconv.Atoi(requestBody.UserID)
+	password := requestBody.Password
 	// 用户认证
 	token, err := UserAuthServer(userId, password)
 
@@ -25,19 +35,19 @@ func Login(ctx *gin.Context) {
 		if entity.ErrorUser.ErrorToString(err) == entity.ErrorUser.UserNotFound.Error() {
 			ctx.JSON(http.StatusOK, gin.H{
 				"status_code": http.StatusUnauthorized,
-				"status_msg":  "用户不存在",
+				"status_msg":  "user not exist",
 			})
 			return
 		} else if entity.ErrorUser.ErrorToString(err) == entity.ErrorUser.UserPasswordError.Error() {
 			ctx.JSON(http.StatusOK, gin.H{
 				"status_code": http.StatusUnauthorized,
-				"status_msg":  "密码错误",
+				"status_msg":  "password error",
 			})
 			return
 		} else {
 			ctx.JSON(http.StatusOK, gin.H{
 				"status_code": http.StatusUnauthorized,
-				"status_msg":  "未知错误",
+				"status_msg":  "unknown error",
 			})
 			return
 		}
@@ -46,13 +56,13 @@ func Login(ctx *gin.Context) {
 	// 用户认证成功
 	ctx.JSON(http.StatusOK, gin.H{
 		"status_code": http.StatusOK,
-		"status_msg":  "登录成功",
+		"status_msg":  "login successfully",
 		"token":       token,
 	})
 }
 
 // UserAuthServer
-// Maintainers:贺胜 Times:2021-04-15
+// Maintainers:贺胜 Times:2023-04-15
 // Part 1:用户认证
 // Part 2:用户认证服务，如果用户不存在，返回错误，如果密码错误，返回错误，如果成功，返回token
 func UserAuthServer(userId int, password string) (string, error) {

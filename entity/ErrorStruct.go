@@ -6,7 +6,7 @@ import (
 )
 
 // ErrorInfo
-// Maintainers:贺胜 Times:2021-04-15
+// Maintainers:贺胜 Times:2023-04-15
 // Part 1:错误信息结构体
 type ErrorInfo struct {
 	UserNotFound      error
@@ -14,7 +14,7 @@ type ErrorInfo struct {
 }
 
 // ErrorToString
-// Maintainers:贺胜 Times:2021-04-15
+// Maintainers:贺胜 Times:2023-04-15
 // Part 1:错误信息转换为字符串
 func (t *ErrorInfo) ErrorToString(err error) string {
 	errMessage := fmt.Sprintf("%s", err)
@@ -24,7 +24,7 @@ func (t *ErrorInfo) ErrorToString(err error) string {
 var ErrorUser ErrorInfo
 
 // init
-// Maintainers:贺胜 Times:2021-04-15
+// Maintainers:贺胜 Times:2023-04-15
 // Part 1:初始化错误信息
 func init() {
 	ErrorUser = ErrorInfo{
