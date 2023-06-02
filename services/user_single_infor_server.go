@@ -22,7 +22,7 @@ func UserSingleInfoServer(ctx *gin.Context) {
 	if UserMsg.UserID == 0 {
 		ctx.JSON(http.StatusOK, gin.H{
 			"status_code": 200,
-			"status_msg":  "用户不存在",
+			"status_msg":  "user not exist",
 			"user":        nil,
 		})
 		return
@@ -42,7 +42,7 @@ func UserSingleInfoServer(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, gin.H{
 		"status_code": 200,
-		"status_msg":  "获取成功",
+		"status_msg":  "get successfully",
 		"user": struct {
 			UserID    int    `json:"user_id"`
 			NickName  string `json:"nickname"`
