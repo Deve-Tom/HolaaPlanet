@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dd42b86d-94b7-4a19-af86-8ff18fa40bb8" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/HolaaPlanet/services/user_sendmessage_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/HolaaPlanet.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HolaaPlanet/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/HolaaPlanet/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HolaaPlanet/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/HolaaPlanet/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HolaaPlanet/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/HolaaPlanet/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HolaaPlanet/routers/app.go" beforeDir="false" afterPath="$PROJECT_DIR$/HolaaPlanet/routers/app.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HolaaPlanet/services/user_login_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/HolaaPlanet/services/user_login_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HolaaPlanet/services/user_register_server.go" beforeDir="false" afterPath="$PROJECT_DIR$/HolaaPlanet/services/user_register_server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/jwt.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/utils.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/conf.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/Config.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/DatabaseStruct.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/ErrorStruct.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/middleware/AuthMiddleWare.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routers/app.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user_login_server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user_register_server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/user_single_infor_server.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/user_avatar/default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/CSS/login.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/CSS/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/CSS/register.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/JS/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/img/QQ.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/img/sofa.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/img/weixin.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/img/yuhangyuan.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/login/register.html" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/HolaaPlanet" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2QHpptcfcnZjibZQdNbai46JdJw" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Cwy88&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.vgo&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="go build HolaaPlanet" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Github" />
+      <working_directory value="$PROJECT_DIR$/HolaaPlanet" />
+      <kind value="PACKAGE" />
+      <package value="HolaaPlanet" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$/HolaaPlanet/main.go" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go 构建.go build HolaaPlanet" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>
