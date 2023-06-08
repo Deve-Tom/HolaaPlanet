@@ -22,5 +22,8 @@ func InitRouter() *gin.Engine {
 	apiRouter.POST("/user/login/", services.Login)
 	apiRouter.GET("/user/", middleware.AuthMiddleWare(), services.UserSingleInfoServer)
 
+	//Maintainers:邵洁  Times:2023-06-08
+	apiRouter.PUT("/user/personal_duration/", services.PerDuration)
+
 	return r
 }
