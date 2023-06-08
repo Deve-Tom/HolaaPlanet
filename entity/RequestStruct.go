@@ -21,8 +21,6 @@ type RequestBodyUserRegister struct {
 // Maintainers:邵洁 Times: 2023-06-08
 // Part 1: 专注时长Put请求方式结构体
 type RequestPerTime struct {
-	UserID    int    `json:"user_id"`
-	DayTime   string `json:"ay_focus_time"`
-	WeekTime  string `json:"week_focus_time"`
-	MonthTime string `json:"month_focus_time"`
+	UserID int    `json:"user_id"`
+	Time   string `json:"time"`
 }
