@@ -188,9 +188,9 @@ func changeTableAutoIncrement(db *gorm.DB) {
 // Part 2:使用Gorm框架修改表中用户关注时长的数据库数据格式为time(00:00:00)
 // Part 3:修改表中用户关注时长的数据库数据格式为time(00:00:00)，不会重复修改，如果存在则跳过/*
 func changeTableUserFocusTimeType(db *gorm.DB) {
-	db.Exec("alter table `users` change day_focus_time day_focus_time time null;")
-	db.Exec("alter table `users` change week_focus_time week_focus_time time null;")
-	db.Exec("alter table `users` change month_focus_time month_focus_time time null;")
+	db.Exec("alter table `users` change day_focus_time day_focus_time bigint null;")
+	db.Exec("alter table `users` change week_focus_time week_focus_time bigint null;")
+	db.Exec("alter table `users` change month_focus_time month_focus_time bigint null;")
 }
 
 // createForeignKey
