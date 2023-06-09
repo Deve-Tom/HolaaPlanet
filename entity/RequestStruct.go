@@ -21,6 +21,16 @@ type RequestBodyUserRegister struct {
 // Maintainers:邵洁 Times: 2023-06-08
 // Part 1: 专注时长Put请求方式结构体
 type RequestPerTime struct {
-	UserID int    `json:"user_id"`
-	Time   string `json:"time"`
+	UserID int `json:"user_id"`
+	Time   int `json:"time"`
+}
+
+// RequestUpdateInformation
+// Maintainers:邵洁 Times: 2023-06-09
+// Part 1: 用户信息修改Post请求方式结构体
+type RequestUpdateInformation struct {
+	UserID    int    `json:"user_id"`
+	NickName  string `json:"nickname"`
+	Signature string `json:"person_signature"`
+	PassWord  string `json:"password"`
 }
