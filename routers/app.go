@@ -26,11 +26,11 @@ func InitRouter() *gin.Engine {
 	apiRouter.GET("/user/ranking_day/", middleware.AuthMiddleWare(), services.Ranking_day)
 	apiRouter.GET("/user/ranking_week/", middleware.AuthMiddleWare(), services.Ranking_week)
 	apiRouter.GET("/user/ranking_month/", middleware.AuthMiddleWare(), services.Ranking_month)
-	apiRouter.POST("/user/get_achievements_focus/", services.GetAchievement_focus)
-	apiRouter.POST("/user/get_achievements_friends/", services.GetAchievement_friends)
-	apiRouter.POST("/user/get_achievements_plans/", services.GetAchievement_plans)
-	apiRouter.POST("/user/get_Quotes/", services.GetQuotes)
-	apiRouter.PUT("/user/create_plan_lists/", services.CreatePlanLists)
+	apiRouter.POST("/user/get_achievements_focus/", middleware.AuthMiddleWare(), services.GetAchievement_focus)
+	apiRouter.POST("/user/get_achievements_friends/", middleware.AuthMiddleWare(), services.GetAchievement_friends)
+	apiRouter.POST("/user/get_achievements_plans/", middleware.AuthMiddleWare(), services.GetAchievement_plans)
+	apiRouter.POST("/user/get_Quotes/", middleware.AuthMiddleWare(), services.GetQuotes)
+	apiRouter.PUT("/user/create_plan_lists/", middleware.AuthMiddleWare(), services.CreatePlanLists)
 
 	return r
 }
