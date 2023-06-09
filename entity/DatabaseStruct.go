@@ -8,16 +8,16 @@ import "time"
 // Part 2:定义用户表，包括用户ID、在线状态、昵称、密码、个性签名、用户Token、日关注时间、周关注时间、月关注时间
 // Bug修复:修复原WeakFocusTime拼写错误，改为WeekFocusTime
 type User struct {
-	UserID         int       `gorm:"column:user_id;type:int;not null;primary key auto_increment"`
-	UserAvatar     string    `gorm:"column:user_avatar;type:varchar(100)"`
-	OnlineStatus   int       `gorm:"column:online_status;type:int;default:0"`
-	Nickname       string    `gorm:"column:nickname;type:nvarchar(12);not null"`
-	Password       string    `gorm:"column:password;type:varchar(40);not null"`
-	Signature      string    `gorm:"column:person_signature;type:nvarchar(50);"`
-	UserToken      string    `gorm:"column:user_token;type:varchar(400)"`
-	DayFocusTime   time.Time `gorm:"column:day_focus_time;type:time;default:00:00:00"`
-	WeekFocusTime  time.Time `gorm:"column:week_focus_time;type:time;default:00:00:00"`
-	MonthFocusTime time.Time `gorm:"column:month_focus_time;type:time;default:00:00:00"`
+	UserID         int    `gorm:"column:user_id;type:int;not null;primary key auto_increment"`
+	UserAvatar     string `gorm:"column:user_avatar;type:varchar(100)"`
+	OnlineStatus   int    `gorm:"column:online_status;type:int;default:0"`
+	Nickname       string `gorm:"column:nickname;type:nvarchar(12);not null"`
+	Password       string `gorm:"column:password;type:varchar(40);not null"`
+	Signature      string `gorm:"column:person_signature;type:nvarchar(50);"`
+	UserToken      string `gorm:"column:user_token;type:varchar(400)"`
+	DayFocusTime   int64  `gorm:"column:day_focus_time;type:bigint;"`
+	WeekFocusTime  int64  `gorm:"column:week_focus_time;type:bigint;"`
+	MonthFocusTime int64  `gorm:"column:month_focus_time;type:bigint;"`
 }
 
 // Group
