@@ -22,13 +22,12 @@ func Ranking_week(ctx *gin.Context) {
 		return
 	}
 	var count int64 = 0
-	configs.DB.Model(&entity.User{}).Where("weak_focus_time > ?", UserMsg.WeekFocusTime).Count(&count)
-	count1 := strconv.FormatInt(count, 10)
+	configs.DB.Model(&entity.User{}).Distinct("week_focus_time").Where("week_focus_time >= ?", UserMsg.WeekFocusTime).Count(&count)
 	if count < 100 && count > 0 {
 		ctx.JSON(http.StatusOK, gin.H{
 			"status_code": 0,
 			"status_msg":  "查找成功",
-			"ranking":     count1,
+			"ranking":     count,
 		})
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{

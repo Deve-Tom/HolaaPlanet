@@ -22,13 +22,12 @@ func Ranking_day(ctx *gin.Context) {
 		return
 	}
 	var count int64 = 0
-	configs.DB.Model(&entity.User{}).Where("day_focus_time > ?", UserMsg.DayFocusTime).Count(&count)
-	count1 := strconv.FormatInt(count, 10)
+	configs.DB.Model(&entity.User{}).Distinct("day_focus_time").Where("day_focus_time >= ?", UserMsg.DayFocusTime).Count(&count)
 	if count < 100 && count > 0 {
 		ctx.JSON(http.StatusOK, gin.H{
 			"status_code": 0,
 			"status_msg":  "查找成功",
-			"ranking":     count1,
+			"ranking":     count,
 		})
 	} else {
 		ctx.JSON(http.StatusOK, gin.H{
