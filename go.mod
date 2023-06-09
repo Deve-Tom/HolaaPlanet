@@ -5,6 +5,7 @@ go 1.19
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.9.0
+	github.com/gorilla/websocket v1.5.0
 	github.com/spf13/viper v1.15.0
 	gorm.io/driver/mysql v1.5.0
 	gorm.io/gorm v1.25.0

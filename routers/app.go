@@ -22,6 +22,9 @@ func InitRouter() *gin.Engine {
 	apiRouter.POST("/user/login/", services.Login)
 	apiRouter.GET("/user/", middleware.AuthMiddleWare(), services.UserSingleInfoServer)
 
+	// Maintainers:陈微雨 Times:2023-06-09
+	apiRouter.GET("/user/send_message/", middleware.AuthMiddleWare(), services.Handler)
+
 	// Maintainers:宋昭城 Times:2023-06-03
 	apiRouter.GET("/user/ranking_day/", middleware.AuthMiddleWare(), services.Ranking_day)
 	apiRouter.GET("/user/ranking_week/", middleware.AuthMiddleWare(), services.Ranking_week)
