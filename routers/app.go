@@ -22,5 +22,8 @@ func InitRouter() *gin.Engine {
 	apiRouter.POST("/user/login/", services.Login)
 	apiRouter.GET("/user/", middleware.AuthMiddleWare(), services.UserSingleInfoServer)
 
+	// Maintainers:陈微雨 Times:2023-06-09
+	apiRouter.GET("/user/send_message/", middleware.AuthMiddleWare(), services.Handler)
+
 	return r
 }
