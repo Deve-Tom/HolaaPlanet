@@ -14,11 +14,21 @@ import (
 // Part 2:验证token是否为空
 // Part 3:验证token是否有效
 // Part 4:验证用户是否存在
+// Bug修复：修复了token验证时的一个bug 2023-06-09
 func AuthMiddleWare() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		// 获取token和user_id
 		tokenString := ctx.Query("token")
 		userID := ctx.Query("user_id")
+
+		// 如果请求链上不存在则从json中获取
+		if tokenString == "" {
+			tokenString = ctx.PostForm("token")
+		}
+
+		if userID == "" {
+			userID = ctx.PostForm("user_id")
+		}
 
 		// 验证token是否为空
 		if userID == "" {
