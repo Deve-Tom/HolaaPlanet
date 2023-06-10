@@ -1,6 +1,6 @@
 mysql:
   user: root
-  password: 123456
+  password: tjc1028
   host: 127.0.0.1
   port: 3306
   database: holaa

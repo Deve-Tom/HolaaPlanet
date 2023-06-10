@@ -40,5 +40,12 @@ func InitRouter() *gin.Engine {
 	apiRouter.POST("/user/update_information/", services.UpdateInformation)
 	apiRouter.PUT("/user/multiplayer_duration/", services.MulDuration)
 
+	// Maintainers: 庹建川 Times:2023-06-03
+	apiRouter.PUT("/user/add_friends/", services.AddFriend)
+	apiRouter.DELETE("/user/delete_friends/", services.DeleteFriend)
+	apiRouter.PUT("/user/favorite_friends/", services.FavoriteFriend)
+	apiRouter.POST("/user/friend_view", services.ViewFriend)
+	//apiRouter.POST("/user/chat_view/",services.ViewChat)
+
 	return r
 }
