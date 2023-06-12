@@ -13,10 +13,6 @@ import (
 	"time"
 )
 
-type SendMsg struct {
-	Content string `json:"content"`
-}
-
 type ReplyMsg struct {
 	Code    int    `json:"code"`
 	Content string `json:"content"`
@@ -82,19 +78,19 @@ func (c *Client) Read() {
 	}()
 	for {
 		c.Socket.PongHandler()
-		sendMsg := new(SendMsg)
-		err := c.Socket.ReadJSON(&sendMsg)
+		msgType, content, err := c.Socket.ReadMessage() // 使用 ReadMessage 方法接收消息
 		if err != nil {
-			log.Println("数据格式不正确。", err)
-			Manager.Unregister <- c
-			_ = c.Socket.Close()
-			break
+			log.Println("read error:", err)
+			return
 		}
-		//发送消息
-		log.Println(c.ID, "发送消息", sendMsg.Content)
-		Manager.Broadcast <- &Broadcast{
-			Client:  c,
-			Message: []byte(sendMsg.Content), //发送过来的消息
+		if msgType == websocket.TextMessage { // 如果消息类型是纯文本消息
+			text := string(content) // 将 []byte 类型的 message 转换为 string 类型
+			//发送消息
+			log.Println(c.ID, "发送消息", text)
+			Manager.Broadcast <- &Broadcast{
+				Client:  c,
+				Message: []byte(text), //发送过来的消息
+			}
 		}
 	}
 }
@@ -116,7 +112,11 @@ func (c *Client) Write() {
 				Content: fmt.Sprintf("%s", string(message)),
 			}
 			msg, _ := json.Marshal(replyMsg)
-			_ = c.Socket.WriteMessage(websocket.TextMessage, msg)
+			err := c.Socket.WriteMessage(websocket.TextMessage, msg) //发送消息到客户端
+			if err != nil {
+				log.Println("write error:", err)
+				return
+			}
 		}
 	}
 }
@@ -143,8 +143,8 @@ func (manager *ClientManager) Start() {
 				}
 				msg, _ := json.Marshal(replyMsg)
 				_ = conn.Socket.WriteMessage(websocket.TextMessage, msg)
-				close(conn.Send)
-				delete(Manager.Clients, conn.ID)
+				close(conn.Send)                 //关闭发送通道
+				delete(Manager.Clients, conn.ID) //删除连接
 			}
 		case broadcast := <-Manager.Broadcast:
 			message := broadcast.Message
@@ -227,6 +227,5 @@ func InsertMsg(id string, sendId string, context string) bool {
 			}
 		}
 	}
-
 	return true
 }
