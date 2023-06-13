@@ -108,7 +108,7 @@ func (c *Client) Write() {
 			}
 			log.Println(c.ID, "接受消息:", string(message))
 			replyMsg := ReplyMsg{
-				Code:    1,
+				Code:    0,
 				Content: fmt.Sprintf("%s", string(message)),
 			}
 			msg, _ := json.Marshal(replyMsg)
@@ -129,7 +129,7 @@ func (manager *ClientManager) Start() {
 			log.Printf("建立新连接: %v", conn.ID)
 			Manager.Clients[conn.ID] = conn //把连接放到用户管理上
 			replyMsg := ReplyMsg{
-				Code:    1,
+				Code:    0,
 				Content: "已连接至服务器",
 			}
 			msg, _ := json.Marshal(replyMsg)
@@ -138,7 +138,7 @@ func (manager *ClientManager) Start() {
 			log.Printf("连接失败:%v", conn.ID)
 			if _, ok := Manager.Clients[conn.ID]; ok {
 				replyMsg := &ReplyMsg{
-					Code:    0,
+					Code:    -1,
 					Content: "连接已断开",
 				}
 				msg, _ := json.Marshal(replyMsg)
@@ -166,7 +166,7 @@ func (manager *ClientManager) Start() {
 			if flag {
 				log.Println("对方在线应答")
 				replyMsg := &ReplyMsg{
-					Code:    1,
+					Code:    0,
 					Content: "对方在线应答",
 				}
 				msg, _ := json.Marshal(replyMsg)
@@ -179,7 +179,7 @@ func (manager *ClientManager) Start() {
 			} else {
 				log.Println("对方不在线")
 				replyMsg := ReplyMsg{
-					Code:    0,
+					Code:    -1,
 					Content: "对方不在线应答",
 				}
 				msg, _ := json.Marshal(replyMsg)
