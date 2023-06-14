@@ -15,6 +15,7 @@ import (
 
 type ReplyMsg struct {
 	Code    int    `json:"code"`
+	UID     string `json:"uid"`
 	Content string `json:"content"`
 }
 
@@ -22,12 +23,12 @@ type Client struct {
 	ID     string
 	SendID string
 	Socket *websocket.Conn
-	Send   chan []byte
+	Send   chan Message
 }
 
 type Broadcast struct {
 	Client  *Client
-	Message []byte
+	Message Message
 	Type    int
 }
 
@@ -47,6 +48,17 @@ var Manager = ClientManager{
 	Unregister: make(chan *Client),
 }
 
+type Message struct {
+	Content string `json:"content"`
+	Sender  string `json:"sender"`
+}
+
+// Handler
+// Maintainers:陈微雨 Times:2021-06-09
+// Part 1:获取用户ID和发送对象的ID
+// Part 2:升级websocket协议
+// Part 3:创建用户实例并将其注册到用户管理上
+// Part 4:进行读消息和写消息
 func Handler(c *gin.Context) {
 	uid := c.Query("user_id")
 	sendId := c.Query("send_id")
@@ -63,7 +75,7 @@ func Handler(c *gin.Context) {
 		ID:     uid,    //1->2
 		SendID: sendId, //2->1
 		Socket: conn,
-		Send:   make(chan []byte),
+		Send:   make(chan Message),
 	}
 	//用户注册到用户管理上
 	Manager.Register <- client
@@ -71,13 +83,15 @@ func Handler(c *gin.Context) {
 	go client.Write()
 }
 
+// Read
+// Maintainers:陈微雨 Times:2021-06-09
 func (c *Client) Read() {
 	defer func() {
 		Manager.Unregister <- c
 		_ = c.Socket.Close()
 	}()
 	for {
-		c.Socket.PongHandler()
+		c.Socket.PongHandler()                          //检测客户端与服务端的连接
 		msgType, content, err := c.Socket.ReadMessage() // 使用 ReadMessage 方法接收消息
 		if err != nil {
 			log.Println("read error:", err)
@@ -86,10 +100,11 @@ func (c *Client) Read() {
 		if msgType == websocket.TextMessage { // 如果消息类型是纯文本消息
 			text := string(content) // 将 []byte 类型的 message 转换为 string 类型
 			//发送消息
+			msg := Message{Content: text, Sender: c.ID}
 			log.Println(c.ID, "发送消息", text)
 			Manager.Broadcast <- &Broadcast{
 				Client:  c,
-				Message: []byte(text), //发送过来的消息
+				Message: msg, //发送过来的消息
 			}
 		}
 	}
@@ -106,10 +121,11 @@ func (c *Client) Write() {
 				_ = c.Socket.WriteMessage(websocket.CloseMessage, []byte{})
 				return
 			}
-			log.Println(c.ID, "接受消息:", string(message))
+			log.Println(c.ID, "接受消息:", message.Content)
 			replyMsg := ReplyMsg{
 				Code:    0,
-				Content: fmt.Sprintf("%s", string(message)),
+				UID:     message.Sender,
+				Content: fmt.Sprintf("%s", message.Content),
 			}
 			msg, _ := json.Marshal(replyMsg)
 			err := c.Socket.WriteMessage(websocket.TextMessage, msg) //发送消息到客户端
@@ -130,6 +146,7 @@ func (manager *ClientManager) Start() {
 			Manager.Clients[conn.ID] = conn //把连接放到用户管理上
 			replyMsg := ReplyMsg{
 				Code:    0,
+				UID:     conn.ID,
 				Content: "已连接至服务器",
 			}
 			msg, _ := json.Marshal(replyMsg)
@@ -139,6 +156,7 @@ func (manager *ClientManager) Start() {
 			if _, ok := Manager.Clients[conn.ID]; ok {
 				replyMsg := &ReplyMsg{
 					Code:    -1,
+					UID:     conn.ID,
 					Content: "连接已断开",
 				}
 				msg, _ := json.Marshal(replyMsg)
@@ -167,11 +185,12 @@ func (manager *ClientManager) Start() {
 				log.Println("对方在线应答")
 				replyMsg := &ReplyMsg{
 					Code:    0,
+					UID:     sendId,
 					Content: "对方在线应答",
 				}
 				msg, _ := json.Marshal(replyMsg)
 				_ = broadcast.Client.Socket.WriteMessage(websocket.TextMessage, msg)
-				if ok := InsertMsg(id, sendId, string(message)); ok {
+				if ok := InsertMsg(id, sendId, message.Content, flag); ok {
 					log.Println("insert_success")
 				} else {
 					log.Println("insert_fail")
@@ -180,16 +199,22 @@ func (manager *ClientManager) Start() {
 				log.Println("对方不在线")
 				replyMsg := ReplyMsg{
 					Code:    -1,
+					UID:     sendId,
 					Content: "对方不在线应答",
 				}
 				msg, _ := json.Marshal(replyMsg)
 				_ = broadcast.Client.Socket.WriteMessage(websocket.TextMessage, msg)
+				if ok := InsertMsg(id, sendId, message.Content, flag); ok {
+					log.Println("insert_success")
+				} else {
+					log.Println("insert_fail")
+				}
 			}
 		}
 	}
 }
 
-func InsertMsg(id string, sendId string, context string) bool {
+func InsertMsg(id string, sendId string, context string, flag bool) bool {
 	result := configs.DB.Find(&entity.SendUserMessage{})
 	id1, _ := strconv.Atoi(id)
 	sendId1, _ := strconv.Atoi(sendId)
@@ -199,26 +224,57 @@ func InsertMsg(id string, sendId string, context string) bool {
 		log.Print(result.Error)
 		return false
 	} else {
-		if result.RowsAffected == 0 {
+		if result.RowsAffected == 0 && flag == true {
 			user := entity.SendUserMessage{
 				SendUser:      id1,
 				ReceiveUser:   sendId1,
 				Message:       context,
 				SendTime:      time.Now(),
 				UserMessageID: 1,
+				ReadStatus:    1,
 			}
 			createRe := configs.DB.Create(&user)
 			if createRe.Error != nil {
 				log.Print(createRe.Error)
 				return false
 			}
-		} else {
+		} else if flag {
 			user := entity.SendUserMessage{
 				SendUser:      id1,
 				ReceiveUser:   sendId1,
 				Message:       context,
 				SendTime:      time.Now(),
 				UserMessageID: maxvalue + 1,
+				ReadStatus:    1,
+			}
+			createRe := configs.DB.Create(&user)
+			if createRe.Error != nil {
+				log.Print(createRe.Error)
+				return false
+			}
+		}
+		if result.RowsAffected == 0 && flag == false {
+			user := entity.SendUserMessage{
+				SendUser:      id1,
+				ReceiveUser:   sendId1,
+				Message:       context,
+				SendTime:      time.Now(),
+				UserMessageID: 1,
+				ReadStatus:    0,
+			}
+			createRe := configs.DB.Create(&user)
+			if createRe.Error != nil {
+				log.Print(createRe.Error)
+				return false
+			}
+		} else if flag == false {
+			user := entity.SendUserMessage{
+				SendUser:      id1,
+				ReceiveUser:   sendId1,
+				Message:       context,
+				SendTime:      time.Now(),
+				UserMessageID: maxvalue + 1,
+				ReadStatus:    0,
 			}
 			createRe := configs.DB.Create(&user)
 			if createRe.Error != nil {
