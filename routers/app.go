@@ -25,7 +25,7 @@ func InitRouter() *gin.Engine {
 	apiRouter.POST("/user_avatar/upload/", services.HandleUploadFile)
 
 	// Maintainers:陈微雨 Times:2023-06-09
-	apiRouter.GET("/user/send_message/", middleware.AuthMiddleWare(), services.Handler)
+	apiRouter.GET("/user/send_message/", services.Handler)
 
 	// Maintainers:宋昭城 Times:2023-06-03
 	apiRouter.GET("/user/ranking_day/", middleware.AuthMiddleWare(), services.Ranking_day)
@@ -34,7 +34,7 @@ func InitRouter() *gin.Engine {
 	apiRouter.POST("/user/get_achievements_focus/", middleware.AuthMiddleWare(), services.GetAchievement_focus)
 	apiRouter.POST("/user/get_achievements_friends/", middleware.AuthMiddleWare(), services.GetAchievement_friends)
 	apiRouter.POST("/user/get_achievements_plans/", middleware.AuthMiddleWare(), services.GetAchievement_plans)
-	apiRouter.POST("/user/get_Quotes/", middleware.AuthMiddleWare(), services.GetQuotes)
+	apiRouter.POST("/user/get_Quotes/", services.GetQuotes)
 	apiRouter.PUT("/user/create_plan_lists/", middleware.AuthMiddleWare(), services.CreatePlanLists)
 
 	//Maintainers:邵洁  Times:2023-06-08
